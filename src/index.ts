@@ -1,3 +1,5 @@
 import server from './server/server';
 
-server.listen(3333, () => console.log('Server HTTP is running...'));
+const port = process.env.SERVER_PORT;
+
+server.listen(port, () => console.log(`Server HTTP is running on ${port}...`));
