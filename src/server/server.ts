@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import './shared/services/yupTranslates';
+
 import express from 'express';
 import router from './routes/routes';
 
