@@ -8,6 +8,16 @@ router.get('/', (req, res) => {
   return res.send('Olá');
 });
 
+router.get(
+  '/cities',
+  citiesController.getAllCitiesValidation,
+  citiesController.getAllCities,
+);
+router.get(
+  '/cities/:id',
+  citiesController.getByIdValidation,
+  citiesController.getById,
+);
 router.post(
   '/cities',
   citiesController.createCityValidation,
