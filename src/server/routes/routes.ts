@@ -18,6 +18,11 @@ router.get(
   citiesController.getByIdValidation,
   citiesController.getById,
 );
+router.put(
+  '/cities/:id',
+  citiesController.updateByIdValidation,
+  citiesController.updateById,
+);
 router.post(
   '/cities',
   citiesController.createCityValidation,
