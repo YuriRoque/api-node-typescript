@@ -1,3 +1,9 @@
 {
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "prettier.bracketSameLine": false,
+  "prettier.enableDebugLogs": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.semi": true,
+  "prettier.singleQuote": true
 }
