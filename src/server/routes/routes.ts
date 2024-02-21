@@ -8,6 +8,16 @@ router.get('/', (req, res) => {
   return res.send('Olá');
 });
 
+router.post(
+  '/cities',
+  citiesController.createCityValidation,
+  citiesController.createCity,
+);
+router.delete(
+  '/cities/:id',
+  citiesController.deleteByIdValidation,
+  citiesController.deleteById,
+);
 router.get(
   '/cities',
   citiesController.getAllCitiesValidation,
@@ -22,11 +32,6 @@ router.put(
   '/cities/:id',
   citiesController.updateByIdValidation,
   citiesController.updateById,
-);
-router.post(
-  '/cities',
-  citiesController.createCityValidation,
-  citiesController.createCity,
 );
 
 export default router;
