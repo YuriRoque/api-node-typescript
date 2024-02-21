@@ -33,7 +33,7 @@ export const validation: Validation =
       }
     });
 
-    if (!Object.entries(errorsResult)) {
+    if (Object.entries(errorsResult).length === 0) {
       return next();
     } else {
       return res.status(400).json({ errors: errorsResult });
