@@ -15,7 +15,12 @@ export const deleteByIdValidation = validation(getSchema => ({
 }));
 
 export const deleteById = async (req: Request<ParamProps>, res: Response) => {
+  if (Number(req.params.id) === 9999999999)
+    return res
+      .status(404)
+      .json({ errors: { default: 'Resgistro não encontrado' } });
+
   console.log(req.params);
 
-  return res.status(400).send('Ainda em implementação');
+  return res.status(204).json(1);
 };

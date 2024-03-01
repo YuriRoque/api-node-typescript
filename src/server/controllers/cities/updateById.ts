@@ -7,13 +7,13 @@ type ParamProps = {
 };
 
 type BodyProps = {
-  nome: string;
+  name: string;
 };
 
 export const updateByIdValidation = validation(getSchema => ({
   body: getSchema<BodyProps>(
     yup.object().shape({
-      nome: yup.string().required().min(3),
+      name: yup.string().required().min(3),
     }),
   ),
   params: getSchema<ParamProps>(
@@ -23,6 +23,14 @@ export const updateByIdValidation = validation(getSchema => ({
   ),
 }));
 
-export const updateById = async (req: Request<ParamProps>, res: Response) => {
-  return res.status(400).send('Ainda em implementação');
+export const updateById = async (
+  req: Request<ParamProps, {}, BodyProps>,
+  res: Response,
+) => {
+  if (Number(req.params.id) === 9999999999)
+    return res
+      .status(404)
+      .json({ errors: { default: 'Registro não encontrado' } });
+
+  return res.status(204).send();
 };

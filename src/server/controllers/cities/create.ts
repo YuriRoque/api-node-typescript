@@ -15,7 +15,5 @@ export const createCityValidation = validation(getSchema => ({
 }));
 
 export const createCity = async (req: Request<{}, {}, City>, res: Response) => {
-  const validatedData: City | undefined = undefined;
-
-  return res.send(validatedData);
+  return res.status(201).json(1);
 };

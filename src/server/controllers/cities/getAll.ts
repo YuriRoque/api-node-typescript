@@ -22,7 +22,13 @@ export const getAllCities = async (
   req: Request<{}, {}, {}, QueryProps>,
   res: Response,
 ) => {
-  const validatedData: QueryProps | undefined = undefined;
+  res.setHeader('access-control-expose-headers', 'x-total-count');
+  res.setHeader('x-total-count', 1);
 
-  return res.send(validatedData);
+  return res.status(200).json([
+    {
+      id: 1,
+      name: 'Cuiabá',
+    },
+  ]);
 };

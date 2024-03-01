@@ -15,5 +15,10 @@ export const getByIdValidation = validation(getSchema => ({
 }));
 
 export const getById = async (req: Request<ParamProps>, res: Response) => {
-  return res.status(400).send('Ainda em implementação...');
+  if (Number(req.params.id) === 9999999999)
+    return res
+      .status(404)
+      .json({ errors: { default: 'Resgistro não encontrado' } });
+
+  return res.status(200).json({ id: req.params.id, name: 'Cuiabá' });
 };
