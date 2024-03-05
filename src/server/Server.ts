@@ -1,8 +1,8 @@
 import 'dotenv/config';
-import './shared/services/yupTranslates';
+import './shared/services/YupTranslates';
 
 import express from 'express';
-import router from './routes/routes';
+import router from './routes';
 
 const server = express();
 

@@ -1,4 +1,4 @@
-import { City } from '../../models/city';
+import { City } from '../../models/City';
 
 declare module 'knex/types/table' {
   type Tables = {

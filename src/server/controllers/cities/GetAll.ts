@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
-import { validation } from '../../shared/middlewares/validation';
+import { validation } from '../../shared/middlewares/Validation';
 
 type QueryProps = {
   page?: number;

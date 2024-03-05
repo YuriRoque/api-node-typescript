@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import { tableNames } from '../tableNames';
+import { tableNames } from '../TableNames';
 
 export async function up(knex: Knex) {
   knex.schema
