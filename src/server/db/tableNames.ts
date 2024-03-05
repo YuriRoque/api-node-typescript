@@ -1,3 +1,3 @@
 export enum tableNames {
-  cidade = 'cidade',
+  city = 'city',
 }
