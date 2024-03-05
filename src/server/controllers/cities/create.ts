@@ -1,13 +1,12 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
+import { City } from '../../db/models/city';
 import { validation } from '../../shared/middlewares/validation';
 
-type City = {
-  name: string;
-};
+type BodyProps = Omit<City, 'id'> & {};
 
 export const createCityValidation = validation(getSchema => ({
-  body: getSchema<City>(
+  body: getSchema<BodyProps>(
     yup.object().shape({
       name: yup.string().required().min(3),
     }),

@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
+import { City } from '../../db/models/city';
 import { validation } from '../../shared/middlewares/validation';
 
 type ParamProps = {
   id?: number;
 };
 
-type BodyProps = {
-  name: string;
-};
+type BodyProps = Omit<City, 'id'> & {};
 
 export const updateByIdValidation = validation(getSchema => ({
   body: getSchema<BodyProps>(
