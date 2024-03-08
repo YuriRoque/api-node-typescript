@@ -1,4 +1,4 @@
-import server from './server/server';
+import server from './server/Server';
 
 const port = process.env.SERVER_PORT;
 
