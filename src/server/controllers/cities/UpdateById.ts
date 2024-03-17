@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
 import { City } from '../../db/models/City';
-import { validation } from '../../shared/middlewares/Validation';
+import { validation } from '../../shared/middlewares';
 
 type ParamProps = {
   id?: number;

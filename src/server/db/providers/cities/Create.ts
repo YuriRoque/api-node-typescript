@@ -1,5 +1,5 @@
 import { Knex } from '../../knex';
-import { City } from '../../models/City';
+import { City } from '../../models';
 import { tableNames } from '../../TableNames';
 
 export const create = async (
