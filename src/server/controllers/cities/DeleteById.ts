@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
-import { validation } from '../../shared/middlewares/Validation';
+import { citiesProvider } from '../../db/providers/cities';
+import { validation } from '../../shared/middlewares';
 
 type ParamProps = {
   id?: number;
@@ -15,12 +16,23 @@ export const deleteByIdValidation = validation(getSchema => ({
 }));
 
 export const deleteById = async (req: Request<ParamProps>, res: Response) => {
-  if (Number(req.params.id) === 9999999999)
+  if (!req.params.id) {
     return res
-      .status(404)
-      .json({ errors: { default: 'Resgistro não encontrado' } });
+      .status(400)
+      .json({ errors: { default: 'O parâmetro ID é obrigatório' } });
+  }
 
-  console.log(req.params);
+  if (typeof req.params.id === 'number') {
+    const result = await citiesProvider.deleteById(Number(req.params.id));
 
-  return res.status(204).json(1);
+    if (result instanceof Error) {
+      return res.status(500).json({
+        errors: {
+          default: result.message,
+        },
+      });
+    }
+
+    return res.status(204).json({ message: 'Registro removido com sucesso' });
+  }
 };

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
-import { validation } from '../../shared/middlewares/Validation';
+import { citiesProvider } from '../../db/providers/cities';
+import { validation } from '../../shared/middlewares';
 
 type ParamProps = {
   id?: number;
@@ -15,10 +16,21 @@ export const getByIdValidation = validation(getSchema => ({
 }));
 
 export const getById = async (req: Request<ParamProps>, res: Response) => {
-  if (Number(req.params.id) === 9999999999)
+  if (!req.params.id) {
     return res
-      .status(404)
-      .json({ errors: { default: 'Resgistro não encontrado' } });
+      .status(400)
+      .json({ errors: { default: 'O parâmetro ID é obrigatório' } });
+  }
 
-  return res.status(200).json({ id: req.params.id, name: 'Cuiabá' });
+  const result = await citiesProvider.getById(Number(req.params.id));
+
+  if (result instanceof Error) {
+    return res.status(500).json({
+      errors: {
+        default: result.message,
+      },
+    });
+  }
+
+  return res.status(200).json(result);
 };

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as yup from 'yup';
 import { City } from '../../db/models/City';
+import { citiesProvider } from '../../db/providers/cities';
 import { validation } from '../../shared/middlewares';
 
 type ParamProps = {
@@ -26,10 +27,23 @@ export const updateById = async (
   req: Request<ParamProps, {}, BodyProps>,
   res: Response,
 ) => {
-  if (Number(req.params.id) === 9999999999)
+  if (!req.params.id) {
     return res
-      .status(404)
-      .json({ errors: { default: 'Registro não encontrado' } });
+      .status(400)
+      .json({ errors: { default: 'O parâmetro ID é obrigatório' } });
+  }
 
-  return res.status(204).send();
+  const result = await citiesProvider.updateById(req.params.id, req.body);
+
+  if (result instanceof Error) {
+    return res.status(500).json({
+      errors: {
+        default: result.message,
+      },
+    });
+  }
+
+  return res
+    .status(204)
+    .send({ message: 'Registro atualizado com sucesso', ...req.body });
 };
